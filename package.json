@@ -1,0 +1,40 @@
+{
+  "name": "fluxible-addons-react",
+  "version": "0.0.0",
+  "description": "Fluxible addons for use with React",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yahoo/fluxible-addons-react"
+  },
+  "scripts": {
+    "test": "mocha tests/unit/ --recursive --compilers js:babel/register --reporter spec",
+    "cover": "istanbul cover --dir artifacts -- _mocha tests/unit/ --recursive --compilers js:babel/register --reporter spec",
+    "lint": "eslint *.js tests/"
+  },
+  "dependencies": {
+    "hoist-non-react-statics": "^1.0.0",
+    "object-assign": "^3.0.0"
+  },
+  "peerDependencies": {
+    "fluxible": "^0.4.12",
+    "react": "0.13.x"
+  },
+  "devDependencies": {
+    "babel": "^5.0.2",
+    "babel-eslint": "^3.1.17",
+    "chai": "^2.0.0",
+    "coveralls": "^2.11.1",
+    "eslint": "^0.21.2",
+    "flux-router-component": "^0.6.0",
+    "fluxible": "^0.4.12",
+    "istanbul": "^0.3.2",
+    "jsdom": "^3.1.2",
+    "mocha": "^2.0.1",
+    "mockery": "^1.4.0",
+    "pre-commit": "^1.0.7",
+    "react": "0.13.x"
+  },
+  "author": "Michael Ridgway <mridgway@yahoo-inc.com>",
+  "license": "BSD-3-Clause"
+}
