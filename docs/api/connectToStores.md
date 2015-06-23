@@ -1,7 +1,7 @@
 # `connectToStores(Component, stores, getStateFromStores)`
 
 ```js
-import connectToStores from 'fluxible/addons/connectToStores';
+import connectToStores from 'fluxible-addons-react/connectToStores';
 ```
 
 `connectToStores` is a higher-order component that provides a convenient way to access state from the stores from within your component. It takes care of defining `getInitialState` and listening to the stores for updates. The store state will be sent to the `Component` instance as props. It is required that the React context is set and has access to `getStore`. It is recommended to use [`provideContext`](provideContext.md) around your top level component to do this for you.
@@ -37,9 +37,10 @@ Component = connectToStores(Component, [FooStore, BarStore], (context, props) =>
 export default Component;
 ```
 
-### Using [decorator pattern](https://github.com/wycats/javascript-decorators)
+### Decorator
 
-**available in 0.5**
+You may also use the 
+[decorator pattern](https://github.com/wycats/javascript-decorators):
 
 ```js
 @connectToStores([FooStore, BarStore], (context, props) => ({

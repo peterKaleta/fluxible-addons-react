@@ -1,7 +1,7 @@
 # FluxibleComponent
 
 ```js
-import FluxibleComponent from 'fluxible/addons/FluxibleComponent';
+import FluxibleComponent from 'fluxible-addons-react/FluxibleComponent';
 ```
 
 The `FluxibleComponent` is a wrapper component that will provide all of its children with access to the Fluxible component

@@ -5,15 +5,18 @@ be removed. It is highly recommended to use [provideContext](provideContext.md)
 instead.***
 
 ```js
-var FluxibleMixin = require('fluxible/addons/FluxibleMixin');
+var FluxibleMixin = require('fluxible-addons-react/FluxibleMixin');
 ```
 
-The mixin (accessible via `require('fluxible/addons/FluxibleMixin')`) will add the `contextTypes` `getStore` and `executeAction`
+The mixin will add the `contextTypes` `getStore` and `executeAction`
 to your component.
 
-The mixin can also be used to statically list store dependencies and listen to them automatically in `componentDidMount`. This is done by adding a static property `storeListeners` in your component.
+The mixin can also be used to statically list store dependencies and listen to 
+them automatically in `componentDidMount`. This is done by adding a static 
+property `storeListeners` in your component.
 
-You can do this with an array, which will default all store listeners to call the `onChange` method:
+You can do this with an array, which will default all store listeners to call 
+the `onChange` method:
 
 ```js
 var FooStore = require('./stores/FooStore'); // Your store
@@ -50,4 +53,5 @@ var Component = React.createClass({
 });
 ```
 
-This prevents boilerplate for listening to stores in `componentDidMount` and unlistening in `componentWillUnmount`.
+This prevents boilerplate for listening to stores in `componentDidMount` and 
+unlistening in `componentWillUnmount`.
