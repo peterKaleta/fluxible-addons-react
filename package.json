@@ -17,7 +17,7 @@
     "object-assign": "^3.0.0"
   },
   "peerDependencies": {
-    "fluxible": "^0.4.12",
+    "fluxible": ">=0.5.0",
     "react": "0.13.x"
   },
   "devDependencies": {
