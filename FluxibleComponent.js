@@ -5,7 +5,6 @@
 'use strict';
 
 var React = require('react/addons');
-var contextTypes = require('fluxible').contextTypes;
 
 var FluxibleComponent = React.createClass({
     displayName: 'FluxibleComponent',
@@ -13,7 +12,10 @@ var FluxibleComponent = React.createClass({
         context: React.PropTypes.object.isRequired
     },
 
-    childContextTypes: contextTypes,
+    childContextTypes: {
+        executeAction: React.PropTypes.func.isRequired,
+        getStore: React.PropTypes.func.isRequired
+    },
 
     /**
      * Provides the current context as a child context
