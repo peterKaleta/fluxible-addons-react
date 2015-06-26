@@ -6,11 +6,13 @@
 
 var React = require('react');
 var objectAssign = require('object-assign');
-var contextTypes = require('fluxible').contextTypes;
 var hoistNonReactStatics = require('hoist-non-react-statics');
 
 function createComponent(Component, customContextTypes) {
-    var childContextTypes = objectAssign({}, contextTypes, customContextTypes || {});
+    var childContextTypes = objectAssign({
+        executeAction: React.PropTypes.func.isRequired,
+        getStore: React.PropTypes.func.isRequired
+    }, customContextTypes || {});
 
     var ContextProvider = React.createClass({
         displayName: 'ContextProvider',

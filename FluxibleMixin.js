@@ -36,11 +36,13 @@
  */
 var DEFAULT_CHANGE_HANDLER = 'onChange';
 var React = require('react');
-var contextTypes = require('fluxible').contextTypes;
 
 var FluxibleMixin = {
 
-    contextTypes: contextTypes,
+    contextTypes: {
+        executeAction: React.PropTypes.func.isRequired,
+        getStore: React.PropTypes.func.isRequired
+    },
 
     /**
      * Registers staticly declared listeners

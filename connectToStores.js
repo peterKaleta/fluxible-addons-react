@@ -6,13 +6,12 @@
 
 var React = require('react');
 var objectAssign = require('object-assign');
-var contextTypes = require('fluxible').contextTypes;
 var hoistNonReactStatics = require('hoist-non-react-statics');
 
 function createComponent(Component, stores, getStateFromStores, customContextTypes) {
     var componentName = Component.displayName || Component.name;
     var componentContextTypes = objectAssign({
-        getStore: contextTypes.getStore
+        getStore: React.PropTypes.func.isRequired
     }, customContextTypes);
     var StoreConnector = React.createClass({
         displayName: componentName + 'StoreConnector',
