@@ -30,7 +30,52 @@ function createComponent(Component, stores, getStateFromStores, customContextTyp
             }, this);
         },
         getStateFromStores: function () {
-            return getStateFromStores(this.context, this.props);
+            if ('function' !== typeof getStateFromStores) {
+                //@TODO remove this branch in next minor
+                if ('production' !== process.env.NODE_ENV) {
+                    console.warn('Using connectToStores with a state getter ' +
+                        'map has been deprecated. Please use the new API as ' +
+                        'documented at ' +
+                        'http://fluxible.io/api/addons/connectToStores.html');
+                }
+                var state = {};
+                Object.keys(getStateFromStores).forEach(function (storeName) {
+                    var stateGetter = getStateFromStores[storeName];
+                    var store = this.context.getStore(storeName);
+                    objectAssign(state, stateGetter(store, this.props));
+                }, this);
+                return state;
+            }
+            // @TODO remove merged context and pass only context to state getter
+            //      in next minor version
+            var storeInstances = {};
+            var context = this.context;
+            stores.forEach(function (store) {
+                var storeName = store.storeName || store.name || store;
+                if ('production' !== process.env.NODE_ENV) {
+                    Object.defineProperty(storeInstances, storeName, {
+                        get: function () {
+                            console.warn(componentName + '\'s connectToStores ' +
+                                'state getter is trying to access ' + storeName +
+                                '. connectToStore no longer passes the ' +
+                                'stores to the state getter. The state getter ' +
+                                'signature is now (context, props) and you ' +
+                                'should access the store using ' +
+                                '`context.getStore(' + storeName + ')`. See ' +
+                                'https://github.com/yahoo/fluxible/pull/124 ' +
+                                'for more details on this change.');
+                            return context.getStore(store);
+                        }
+                    });
+                } else {
+                    storeInstances[storeName] = this.context.getStore(store);
+                }
+            }, this);
+            var mergedContext = objectAssign(storeInstances, this.context);
+            return getStateFromStores(mergedContext, this.props);
+
+            // @TODO just do this in next minor version
+            //return getStateFromStores(this.context, this.props);
         },
         _onStoreChange: function onStoreChange() {
             if (this.isMounted()) {
