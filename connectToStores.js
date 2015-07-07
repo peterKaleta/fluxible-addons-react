@@ -29,7 +29,11 @@ function createComponent(Component, stores, getStateFromStores, customContextTyp
                 this.context.getStore(Store).removeChangeListener(this._onStoreChange);
             }, this);
         },
-        getStateFromStores: function () {
+        componentWillReceiveProps: function componentWillReceiveProps(nextProps){
+            this.setState(this.getStateFromStores(nextProps));
+        },
+        getStateFromStores: function (props) {
+            props = props || this.props;
             if ('function' !== typeof getStateFromStores) {
                 //@TODO remove this branch in next minor
                 if ('production' !== process.env.NODE_ENV) {
@@ -42,7 +46,7 @@ function createComponent(Component, stores, getStateFromStores, customContextTyp
                 Object.keys(getStateFromStores).forEach(function (storeName) {
                     var stateGetter = getStateFromStores[storeName];
                     var store = this.context.getStore(storeName);
-                    objectAssign(state, stateGetter(store, this.props));
+                    objectAssign(state, stateGetter(store, props));
                 }, this);
                 return state;
             }
@@ -72,10 +76,10 @@ function createComponent(Component, stores, getStateFromStores, customContextTyp
                 }
             }, this);
             var mergedContext = objectAssign(storeInstances, this.context);
-            return getStateFromStores(mergedContext, this.props);
+            return getStateFromStores(mergedContext, props);
 
             // @TODO just do this in next minor version
-            //return getStateFromStores(this.context, this.props);
+            //return getStateFromStores(this.context, props);
         },
         _onStoreChange: function onStoreChange() {
             if (this.isMounted()) {
