@@ -1,7 +1,7 @@
 # `provideContext(Component, customContextTypes)`
 
 ```js
-import provideContext from 'fluxible/addons/provideContext';
+import provideContext from 'fluxible-addons-react/provideContext';
 ```
 
 `provideContext` wraps the `Component` with a higher-order component that 
