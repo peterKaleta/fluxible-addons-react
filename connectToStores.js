@@ -57,20 +57,26 @@ function createComponent(Component, stores, getStateFromStores, customContextTyp
             stores.forEach(function (store) {
                 var storeName = store.storeName || store.name || store;
                 if ('production' !== process.env.NODE_ENV) {
-                    Object.defineProperty(storeInstances, storeName, {
-                        get: function () {
-                            console.warn(componentName + '\'s connectToStores ' +
-                                'state getter is trying to access ' + storeName +
-                                '. connectToStore no longer passes the ' +
-                                'stores to the state getter. The state getter ' +
-                                'signature is now (context, props) and you ' +
-                                'should access the store using ' +
-                                '`context.getStore(' + storeName + ')`. See ' +
-                                'https://github.com/yahoo/fluxible/pull/124 ' +
-                                'for more details on this change.');
-                            return context.getStore(store);
-                        }
-                    });
+                    try {
+                        Object.defineProperty(storeInstances, storeName, {
+                            get: function () {
+                                console.warn(componentName + '\'s connectToStores ' +
+                                    'state getter is trying to access ' + storeName +
+                                    '. connectToStore no longer passes the ' +
+                                    'stores to the state getter. The state getter ' +
+                                    'signature is now (context, props) and you ' +
+                                    'should access the store using ' +
+                                    '`context.getStore(' + storeName + ')`. See ' +
+                                    'https://github.com/yahoo/fluxible/pull/124 ' +
+                                    'for more details on this change.');
+                                return context.getStore(store);
+                            }
+                        });
+                    } catch (e) {
+                        // https://github.com/es-shims/es5-shim#may-fail
+                        // Object.defineProperty will fail on IE8
+                        storeInstances[storeName] = context.getStore(store);
+                    }
                 } else {
                     storeInstances[storeName] = this.context.getStore(store);
                 }
