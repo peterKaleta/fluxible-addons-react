@@ -20,8 +20,9 @@ Join the #fluxible channel of the [Reactiflux](http://reactiflux.com) Slack comm
 
  * [connectToStores](https://github.com/yahoo/fluxible-addons-react/blob/master/docs/api/connectToStores.md)
  * [FluxibleComponent](https://github.com/yahoo/fluxible-addons-react/blob/master/docs/api/FluxibleComponent.md)
- * [FluxibleMixin](https://github.com/yahoo/fluxible-addons-react/blob/master/api/docs/FluxibleMixin.md) (legacy)
- * [provideContext](https://github.com/yahoo/fluxible-addons-react/blob/master/api/docs/provideContext.md)
+ * [FluxibleMixin](https://github.com/yahoo/fluxible-addons-react/blob/master/docs/api/FluxibleMixin.md) (legacy)
+ * [provideContext](https://github.com/yahoo/fluxible-addons-react/blob/master/docs/api/provideContext.md)
+ * [createElementWithContext](https://github.com/yahoo/fluxible-addons-react/blob/master/docs/api/createElementWithContext.md)
 
 ## License
 
